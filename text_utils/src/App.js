@@ -43,6 +43,7 @@ function App() {
         <TextForm 
           heading="Enter the text to analyze" 
           mode={mode}
+          showAlert={showAlert}
         />
         <About mode={mode}/>
       </div>
