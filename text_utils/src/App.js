@@ -7,13 +7,11 @@ import Alert from './components/Alert';
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
-
 function App() {
-  const [mode, setMode] = useState('light'); // whether dark mode is enabled or not
+  const [mode, setMode] = useState('light');
   const [alert, setAlert] = useState(null);
 
   const showAlert = (message, type) => {
@@ -40,20 +38,29 @@ function App() {
 
   return (
     <>
-      <Navbar 
-        title="TextUtils_by_Shikhar" 
-        mode={mode} 
-        toggleMode={toggleMode}
-      />
-      <Alert alert={alert} />
-      <div className="container my-3">
-        <TextForm 
-          heading="Enter the text to analyze" 
-          mode={mode}
-          showAlert={showAlert}
+      <Router>
+        <Navbar 
+          title="TextUtils_by_Shikhar" 
+          mode={mode} 
+          toggleMode={toggleMode}
         />
-        <About mode={mode}/>
-      </div>
+        <Alert alert={alert} />
+        <div className="container my-3">
+          <Routes>
+            <Route path="/about" element={<About mode={mode} />} />
+            <Route 
+              path="/" 
+              element={
+                <TextForm 
+                  heading="Enter the text to analyze" 
+                  mode={mode}
+                  showAlert={showAlert}
+                />
+              } 
+            />
+          </Routes>
+        </div>
+      </Router>  
     </>
   );
 }
